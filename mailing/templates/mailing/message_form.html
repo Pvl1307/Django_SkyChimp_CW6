@@ -1,0 +1,54 @@
+{% extends 'mailing/base.html' %}
+
+{% block title %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="width: 95%;">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            {% if object %}
+            Edit message
+            {% else %}
+            Create message
+            {% endif %}
+        </h1>
+    </div>
+    {% endblock %}
+
+
+    {% block content %}
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="col-md-6">
+                <form method="post" {% if object %} action="{% url 'mailing:message_update' object.pk %}" {% else
+                      %}action="{% url 'mailing:message_create' %}" {% endif %}>
+                    {% csrf_token %}
+                    {% with theme_value=object.theme|default:'' %}
+                    <div class="mb-3">
+                        <label for="id_theme" class="form-label">Тема</label>
+                        <input type="text" name="theme" class="form-control" id="id_theme"
+                               value="{{ theme_value }}">
+                    </div>
+                    {% endwith %}
+                    {% with message_value=object.message|default:'' %}
+                    <div class="mb-3">
+                        <label for="id_message" class="form-label">Сообщение</label>
+                        <textarea name="message" class="form-control" id="id_message"
+                                  rows="4">{{ message_value }}</textarea>
+
+                    </div>
+                    {% endwith %}
+                    <button type="submit" class="btn btn-outline-success">
+                        {% if object %}
+                        Сохранить
+                        {% else %}
+                        Создать
+                        {% endif%}
+                    </button>
+
+                    <a href="{% url 'mailing:message_list' %}" class="btn btn-outline-danger">Отмена</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+

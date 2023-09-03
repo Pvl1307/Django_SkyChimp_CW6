@@ -1,0 +1,88 @@
+{% extends 'mailing/base.html' %}
+
+{% block title %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="width: 95%;">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            {% if object %}
+            Edit settings
+            {% else %}
+            Create settings
+            {% endif %}
+        </h1>
+    </div>
+    {% endblock %}
+
+
+    {% block content %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="col-md-6">
+                <form method="post" {% if object %} action="{% url 'mailing:mailing_settings_update' object.pk %}" {%
+                      else
+                      %} action="{% url 'mailing:mailing_settings_create' %}" {% endif %}>
+                    {% csrf_token %}
+
+                    {% with time_value=object.time|default:'' %}
+                    <div class="mb-3">
+                        <label for="time" class="form-label">Время</label>
+                        <input type="time" name="time" class="form-control" id="time"
+                               value="{{ form.instance.time|default:'' }}">
+                    </div>
+                    {% endwith %}
+
+
+
+                    {% with period_value=object.period|default:'' %}
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="period">Период</label>
+                        <select class="form-select" id="period" name="period">
+                            {% for value, display_name in form.fields.period.choices %}
+                            <option value="{{ value }}" {% if value == period_value %}selected{% endif %}>
+                                {{ display_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% endwith %}
+
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="status">Статус</label>
+                        <select class="form-select" id="status" name="status">
+                            {% for value, display_name in form.fields.status.choices %}
+                            <option value="{{ value }}" {% if value == form.instance.status %}selected{% endif %}>
+                                {{ display_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="id_message">Сообщение</label>
+                        <select class="form-select" id="id_message" name="message">
+                            {% for value, display_name in form.fields.message.choices %}
+                            {% if value != '' %}
+                            <option value="{{ value }}" {% if value == form.instance.message.pk %}selected{% endif %}>
+                                {{ display_name }}
+                            </option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!---->
+                    <button type="submit" class="btn btn-outline-success">
+                        {% if object %}
+                        Сохранить
+                        {% else %}
+                        Создать
+                        {% endif%}
+                    </button>
+
+                    <a href="{% url 'mailing:mailing_settings_list' %}" class="btn btn-outline-danger">Отмена</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

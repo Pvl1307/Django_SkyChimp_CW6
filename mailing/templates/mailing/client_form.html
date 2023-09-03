@@ -1,0 +1,73 @@
+{% extends 'mailing/base.html' %}
+
+{% block title %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="width: 95%;">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            {% if object %}
+            Edit client
+            {% else %}
+            Create client
+            {% endif %}
+        </h1>
+    </div>
+    {% endblock %}
+
+
+    {% block content %}
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="col-md-6">
+                <form method="post" {% if object %}action="{% url 'mailing:client_update' object.pk %}" {% else
+                      %}action="{% url 'mailing:client_create' %}" {% endif %}>
+                    {% csrf_token %}
+                    {% with email_value=object.email|default:'' %}
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label">Адрес электронной почты</label>
+                        <input type="email" name="email" class="form-control" id="id_email"
+                               value="{{ object.email|default:'' }}" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">Пример: pvl@gmail.com</div>
+                    </div>
+                    {% endwith %}
+
+                    {% with first_name_value=object.first_name|default:'' %}
+                    <div class="mb-3">
+                        <label for="id_first_name" class="form-label">Имя</label>
+                        <input type="text" name="first_name" class="form-control" id="id_first_name"
+                               value="{{ first_name_value }}">
+                    </div>
+                    {% endwith %}
+
+                    {% with last_name_value=object.last_name|default:'' %}
+                    <div class="mb-3">
+                        <label for="id_last_name" class="form-label">Фамилия</label>
+                        <input type="text" name="last_name" class="form-control" id="id_last_name"
+                               value="{{ last_name_value }}">
+                    </div>
+                    {% endwith %}
+
+                    {% with comment_value=object.comment|default:'' %}
+                    <div class="mb-3">
+                        <label for="id_comment" class="form-label">Комментарий</label>
+                        <textarea name="comment" class="form-control" id="id_comment"
+                                  rows="4">{{ comment_value }}</textarea>
+                    </div>
+                    {% endwith %}
+
+                    <button type="submit" class="btn btn-outline-success">
+                        {% if object %}
+                        Сохранить
+                        {% else %}
+                        Создать
+                        {% endif%}
+                    </button>
+
+                    <a href="{% url 'mailing:client_list' %}" class="btn btn-outline-danger">Отмена</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    {% endblock%}
