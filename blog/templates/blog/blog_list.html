@@ -1,0 +1,41 @@
+{% extends 'mailing/base.html' %}
+
+{% load blog_tags %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row text-center mb-4">
+        <div class="col-md-12">
+            <h2 style="color: #007BFF;">Email statistics</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 25px;">
+                <p>Total Mailings: <span style="color: #007BFF; font-weight: bold;">{{ total_mailings }}</span></p>
+                <p>Active Mailings: <span style="color: #007BFF; font-weight: bold;">{{ active_mailings }}</span></p>
+                <p>Unique Clients: <span style="color: #007BFF; font-weight: bold;">{{ unique_clients }}</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="d-flex justify-content-around">
+            {% for object in object_list %}
+            <div class="col-3">
+                <div class="card box-shadow text-center">
+                    <img class="card-img-top" src="{{ object.picture|mymedia }}" alt="blog-preview">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ object.title }}</h5>
+                        <p class="card-text">{{ object.text|slice:50 }}...</p>
+                        <div class="btn-group">
+                            <a href="{% url 'blog:blog_view' pk=object.pk %}" class="btn btn-outline-primary">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    {% endblock %}

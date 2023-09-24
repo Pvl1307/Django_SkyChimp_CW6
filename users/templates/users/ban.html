@@ -1,0 +1,28 @@
+{% extends 'mailing/base.html' %}
+
+{% block title %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="width: 95%;">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Ban</h1>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div style="text-align: center; margin-top: 100px;">
+                    <h1>Your Account Has Been Blocked</h1>
+                    <p>We regret to inform you that your account has been temporarily blocked for some reason. This
+                        decision has been made in accordance with the rules and policies of our system.</p>
+                    <p>If you have any questions or need clarification regarding the blocking of your account, please
+                        contact our customer support via email:</p>
+                    <p><strong><a href="#">support@example.com</a></strong></p>
+                    <p>We will do our best to answer all your questions and assist you in regaining access to your
+                        account if possible.</p>
+                    <p>Thank you for your understanding and cooperation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

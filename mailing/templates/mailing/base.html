@@ -97,7 +97,7 @@
 
     <div class="d-flex flex-column flex-shrink-0 bg-body-tertiary" style="width: 4.5rem; height: 100vh;">
 
-        <a href="/" class="d-block p-3 link-body-emphasis text-decoration-none text-center btn btn-primary" title="Home"
+        <a href="{% url 'blog:blog_list' %}" class="d-block p-3 link-body-emphasis text-decoration-none text-center btn btn-primary" title="Home"
            data-bs-toggle="tooltip" data-bs-placement="right">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                  class="bi bi-house-door-fill" viewBox="0 0 16 16">
@@ -109,7 +109,7 @@
 
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
 
-
+            {% if not user.is_staff %}
             <li class="nav-item">
                 <a href="{% url 'mailing:client_list' %}" class="nav-link py-3 border-bottom rounded-0"
                    title="Clients" data-bs-toggle="tooltip"
@@ -122,10 +122,26 @@
                     </svg>
                 </a>
             </li>
+            {% endif %}
 
-
+            {% if user.is_staff %}
             <li>
-                <a href="{% url 'mailing:mailing_settings_list' %}" class="nav-link py-3 border-bottom rounded-0" title="Mailing settings"
+                <a href="{% url 'mailing:users_mailing_settings_list' %}" class="nav-link py-3 border-bottom rounded-0"
+                   title="User's mailing settings"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="right" aria-label="User's mailing settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-gear" viewBox="0 0 16 16">
+                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                    </svg>
+                </a>
+            </li>
+
+            {% else %}
+            <li>
+                <a href="{% url 'mailing:mailing_settings_list' %}" class="nav-link py-3 border-bottom rounded-0"
+                   title="Mailing settings"
                    data-bs-toggle="tooltip"
                    data-bs-placement="right" aria-label="Mailing settings">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -138,7 +154,8 @@
 
 
             <li>
-                <a href="{% url 'mailing:message_list' %}" class="nav-link py-3 border-bottom rounded-0" title="Message" data-bs-toggle="tooltip"
+                <a href="{% url 'mailing:message_list' %}" class="nav-link py-3 border-bottom rounded-0" title="Message"
+                   data-bs-toggle="tooltip"
                    data-bs-placement="right" aria-label="Message">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                          class="bi bi-chat-dots" viewBox="0 0 16 16">
@@ -150,7 +167,7 @@
 
 
             <li>
-                <a href="#" class="nav-link py-3 border-bottom rounded-0" title="Attempts" data-bs-toggle="tooltip"
+                <a href="{% url 'mailing:mailing_attempts_list' %}" class="nav-link py-3 border-bottom rounded-0" title="Attempts" data-bs-toggle="tooltip"
                    data-bs-placement="right" aria-label="Attempts">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                          class="bi bi-info-circle" viewBox="0 0 16 16">
@@ -159,7 +176,58 @@
                     </svg>
                 </a>
             </li>
+            {% endif %}
+
+            {% if request.user.is_staff %}
+            <li class="nav-item">
+                <a href="{% url 'users:user_list' %}" class="nav-link py-3 border-bottom rounded-0"
+                   title="Users" data-bs-toggle="tooltip"
+                   data-bs-placement="right">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-people" viewBox="0 0 16 16">
+                        <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
+                    </svg>
+                </a>
+            </li>
+            {% endif %}
         </ul>
+
+
+        <div class="dropdown border-top">
+            <a href="#"
+               class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle"
+               data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                     class="bi bi-person-fill" viewBox="0 0 16 16">
+                    {% if user.is_authenticated %}
+                    <circle cx="8" cy="8" r="8" fill="none" stroke="green" stroke-width="0.5"/>
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                    {% else %}
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                    {% endif %}
+                </svg>
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+                {% if user.is_authenticated %}
+                <li><span class="dropdown-item">{{ request.user.email }}</span></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                {% if not user.is_staff %}
+                <li><a class="dropdown-item" href="{% url 'users:profile' %}">Profile</a></li>
+                {% endif %}
+                <li><a class="dropdown-item" href="{% url 'users:logout' %}">Log out</a></li>
+
+
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'users:register' %}">Register</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{% url 'users:login' %}">Log in</a></li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 
 
@@ -167,6 +235,7 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="width: 95%;">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2" style="display: flex; align-items: center;">Home</h1>
+
         </div>
         {% endblock %}
 

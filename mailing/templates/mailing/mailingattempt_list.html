@@ -1,0 +1,38 @@
+{% extends 'mailing/base.html' %}
+
+{% block title %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="width: 95%;">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2" style="display: flex; align-items: center;">
+            Mailing Attempts
+
+        </h1>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+
+    <div class="row text-center">
+        <table class="table table-striped-columns">
+            <thead>
+            <tr>
+                <th scope="col">Status</th>
+                <th scope="col">Attempt date</th>
+                <th scope="col">Server response</th>
+                <th scope="col">Mailing</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in object_list|dictsortreversed:"attempt_date" %}
+            <tr>
+                <td>{{ object.status }}</td>
+                <td>{{ object.attempt_date }}</td>
+                <td>{{ object.server_response }}</td>
+                <td>{{ object.settings|linebreaksbr }}</td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+
+    </div>
+    {% endblock %}

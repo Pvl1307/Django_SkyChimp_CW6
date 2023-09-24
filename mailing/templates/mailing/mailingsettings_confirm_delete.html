@@ -15,10 +15,17 @@
             <div class="col-md-6">
                 <form method="post" action="{% url 'mailing:mailing_settings_delete' object.pk %}">
                     {% csrf_token %}
-                    <p>Вы уверены, что хотите удалить рассылку №{{ object.pk }}?</p>
-                    <button type="submit" class="btn btn-outline-success">Удалить</button>
-                    <a href="{% url 'mailing:mailing_settings_list' %}" class="btn btn-outline-danger">Отмена</a>
+                    <div class="text-center my-3">
+                        <p>Are you sure you want to delete mailing settings #{{ object.pk }}?</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-outline-success">Delete</button>
+                        <div class="mx-2"></div>
+                        <a href="{% url 'mailing:mailing_settings_list' %}"
+                           class="btn btn-outline-danger ml-2">Cancel</a>
+                    </div>
                 </form>
+
             </div>
         </div>
     </div>

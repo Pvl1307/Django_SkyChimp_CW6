@@ -1,0 +1,35 @@
+{% extends 'mailing/base.html' %}
+
+{% load blog_tags %}
+
+{% block title %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="width: 95%;">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            {{ object.title }}
+        </h1>
+        <p class="text-right">Views: {{ object.count_of_views }}</p>
+    </div>
+
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <div class="row featurette box-shadow">
+            <div class="col-md-7 text-center">
+                <h2 class="my-4 font-weight-bold">{{ object.title }}</h2>
+                <p class="lead">{{ object.text }}</p>
+                <div class="row text-center">
+                    <div class="col-md-6">
+                        {% if object.date_of_creation %}
+                        <p><strong>Date Created:</strong> {{ object.date_of_creation }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <img class="img-fluid rounded" src="{{ object.picture|mymedia }}" alt="Blog Preview">
+            </div>
+        </div>
+    </div>
+    {% endblock %}

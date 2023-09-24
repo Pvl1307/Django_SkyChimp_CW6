@@ -15,40 +15,28 @@
 
 
     {% block content %}
-
-    <div class="container">
-        <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
-            <div class="col-md-6">
-                <form method="post" {% if object %} action="{% url 'mailing:message_update' object.pk %}" {% else
-                      %}action="{% url 'mailing:message_create' %}" {% endif %}>
-                    {% csrf_token %}
-                    {% with theme_value=object.theme|default:'' %}
-                    <div class="mb-3">
-                        <label for="id_theme" class="form-label">Тема</label>
-                        <input type="text" name="theme" class="form-control" id="id_theme"
-                               value="{{ theme_value }}">
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data" style="text-align: left;">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-outline-success">
+                                {% if object %}
+                                Save
+                                {% else %}
+                                Create
+                                {% endif%}
+                            </button>
+                            <a href="{% url 'mailing:message_list' %}" class="btn btn-outline-danger">Cancel</a>
+                        </form>
                     </div>
-                    {% endwith %}
-                    {% with message_value=object.message|default:'' %}
-                    <div class="mb-3">
-                        <label for="id_message" class="form-label">Сообщение</label>
-                        <textarea name="message" class="form-control" id="id_message"
-                                  rows="4">{{ message_value }}</textarea>
-
-                    </div>
-                    {% endwith %}
-                    <button type="submit" class="btn btn-outline-success">
-                        {% if object %}
-                        Сохранить
-                        {% else %}
-                        Создать
-                        {% endif%}
-                    </button>
-
-                    <a href="{% url 'mailing:message_list' %}" class="btn btn-outline-danger">Отмена</a>
-                </form>
+                </div>
             </div>
         </div>
     </div>
     {% endblock %}
+
 

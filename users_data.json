@@ -1,0 +1,46 @@
+[
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$kBpwxVXxZGG1nykw3w1V1R$b1fOEu5WFYl1ZfkHLJlOF2umuIJMr4AzBSCaoM+eWRo=",
+    "last_login": "2023-09-24T20:33:09.004Z",
+    "is_superuser": true,
+    "first_name": "Admin",
+    "last_name": "Adminov",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-09-24T20:25:51.298Z",
+    "email": "admin@admin.com",
+    "phone_number": null,
+    "avatar": "",
+    "verification_token": null,
+    "is_verified": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$GSd00aTrVuwSZK7I5huHRU$KSEw2rjrSBfAoFl2o18Zq1oEkU3eZq0AjKwfNTsK4Kw=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "Manager",
+    "last_name": "Managerov",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-09-24T20:32:30Z",
+    "email": "manager@m.com",
+    "phone_number": null,
+    "avatar": "",
+    "verification_token": null,
+    "is_verified": false,
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+}
+]

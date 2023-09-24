@@ -1,14 +1,14 @@
 from django.urls import path
 
 from mailing.apps import MailingConfig
-from mailing.views import home, ClientListView, ClientCreateView, ClientUpdateView, ClientDeleteView, MessageListView, \
+from mailing.views import ClientListView, ClientCreateView, ClientUpdateView, ClientDeleteView, MessageListView, \
     MessageCreateView, MessageUpdateView, MessageDeleteView, MailingSettingsListView, MailingSettingsCreateView, \
-    MailingSettingsUpdateView, MailingSettingsDeleteView
+    MailingSettingsUpdateView, MailingSettingsDeleteView, UserMailingSettingsListView, StatusMailingSettingsUpdateView, \
+    MailingAttemptList
 
 app_name = MailingConfig.name
 
 urlpatterns = [
-    path('', home, name='home'),
 
     path('clientlist/', ClientListView.as_view(), name='client_list'),
     path('client/create/', ClientCreateView.as_view(), name='client_create'),
@@ -24,5 +24,11 @@ urlpatterns = [
     path('mailingsettings/create/', MailingSettingsCreateView.as_view(), name='mailing_settings_create'),
     path('mailingsettings/update/<int:pk>', MailingSettingsUpdateView.as_view(), name='mailing_settings_update'),
     path('mailingsettings/delete/<int:pk>/', MailingSettingsDeleteView.as_view(), name='mailing_settings_delete'),
+
+    path('mailing_attempts_list/', MailingAttemptList.as_view(), name='mailing_attempts_list'),
+
+    path('users_mailing_settings_list/', UserMailingSettingsListView.as_view(), name='users_mailing_settings_list'),
+    path('users_mailing_settings_status_update/<int:pk>/', StatusMailingSettingsUpdateView.as_view(),
+         name='users_mailing_settings_status_update'),
 
 ]

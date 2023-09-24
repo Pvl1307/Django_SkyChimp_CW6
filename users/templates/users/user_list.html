@@ -1,0 +1,43 @@
+{% extends 'mailing/base.html' %}
+
+{% block title %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="width: 95%;">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2" style="display: flex; align-items: center;">
+            Users
+            <a class="nav-link py-0 px-2 rounded-0"
+               title="Create new" data-bs-toggle="tooltip"
+               data-bs-placement="right" aria-label="Create new">
+            </a>
+        </h1>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+
+    <div class="row text-center">
+
+        <table class="table table-striped-columns">
+            <thead>
+            <tr>
+                <th scope="col">PK</th>
+                <th scope="col">Email</th>
+                <th scope="col">Name</th>
+                <th scope="col">Activity</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in object_list|dictsort:"pk" %}
+            <tr>
+                <th scope="row">{{ object.pk }}</th>
+                <td>{{ object.email }}</td>
+                <td>{{ object.first_name }} {{ object.last_name }}</td>
+                <td><a href="{% url 'users:users_activity_form' pk=object.pk %}">
+                    {{ object.is_active|yesno:"Active,Inactive" }}</a></td>
+
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    {% endblock %}
