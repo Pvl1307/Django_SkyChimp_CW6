@@ -46,7 +46,8 @@ CACHE_LOCATION=cashe_location://127.0.0.0:6477
    **Пароль и логин для суперпользователя:**
    - `login: admin@admin.com`
    - `password: admin `
-    и **менеджера**
+   
+   **Пароль и логин для менеджера**
    - `login: manager@m.com`
    - `password: manager `
    (Также можно найти в файлах **cm.py** и **csu.py** в `users/management/commands`).
