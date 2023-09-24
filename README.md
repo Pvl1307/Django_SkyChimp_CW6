@@ -38,15 +38,26 @@ CACHE_LOCATION=cashe_location://127.0.0.0:6477
 2. Установите Redis
 
 3. В терминале прописываем команды
-   ```python manage.py migrate```
-   ```python manage.py loaddata group_data.json```
-   ```python manage.py loaddata users_data.json```
+   
+   ```ini
+   python manage.py migrate
+   ```
+   ```ini
+   python manage.py loaddata group_data.json
+   ```
+   ```ini
+   python manage.py loaddata users_data.json
+   ```
    (Пароль и логин для суперюзера и менеджера есть в users/management/commands в файлах **cm.py** и **csu.py**)
    Команда для запуска сервера:
-   ```python manage.py runserver```
+   ```ini
+   python manage.py runserver
+   ```
 
    Команда для запуска работы apscheduler:
-   ```python manage.py runapscheduler```
+   ```ini
+   python manage.py runapscheduler
+   ```
 
 
 ## Работа кода
