@@ -43,11 +43,17 @@ CACHE_LOCATION=cashe_location://127.0.0.0:6477
    - `python manage.py loaddata group_data.json`
    - `python manage.py loaddata users_data.json`
 
-   (Пароль и логин для суперпользователя и менеджера можно найти в файлах **cm.py** и **csu.py** в `users/management/commands`).
+   **Пароль и логин для суперпользователя:**
+   - `login: admin@admin.com`
+   - `password: admin `
+    и **менеджера**
+   - `login: manager@m.com`
+   - `password: manager `
+   (Также можно найти в файлах **cm.py** и **csu.py** в `users/management/commands`).
 
    Команда для запуска сервера: `python manage.py runserver`
 
-   Команда для запуска apscheduler: `python manage.py runapscheduler`
+   Команда для запуска apscheduler(**в другом окне терминала**): `python manage.py runapscheduler`
 
 
 ## Работа кода
