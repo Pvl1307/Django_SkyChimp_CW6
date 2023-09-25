@@ -40,6 +40,7 @@ CACHE_LOCATION=cashe_location://127.0.0.0:6477
 3. В терминале выполните следующие команды:
 
    - `python manage.py migrate`
+   - `python manage.py fill_blog`
    - `python manage.py loaddata group_data.json`
    - `python manage.py loaddata users_data.json`
 
